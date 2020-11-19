@@ -111,7 +111,13 @@ public abstract class BaseDanmaku {
     /**
      * 内边距(像素)
      */
-    public int padding = 0;
+    public int paddingLeft = 0;
+
+    public int paddingRight = 0;
+
+    public int paddingTop = 0;
+
+    public int paddingBottom = 0;
 
     /**
      * 弹幕优先级,0为低优先级,>0为高优先级不会被过滤器过滤
@@ -224,6 +230,20 @@ public abstract class BaseDanmaku {
 
     public void setDuration(Duration duration) {
         this.duration = duration;
+    }
+
+    /**
+     * 设置内边距，单位px
+     */
+    public void setPadding(int left, int top, int right, int bottom) {
+        this.paddingLeft = left;
+        this.paddingTop = top;
+        this.paddingRight = right;
+        this.paddingBottom = bottom;
+    }
+
+    public void setPadding(int i) {
+        this.paddingLeft = this.paddingTop = this.paddingRight = this.paddingBottom = i;
     }
 
     public int draw(IDisplayer displayer) {

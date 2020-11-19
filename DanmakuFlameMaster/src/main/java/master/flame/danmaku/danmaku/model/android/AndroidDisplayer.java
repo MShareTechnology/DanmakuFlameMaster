@@ -528,8 +528,8 @@ public class AndroidDisplayer extends AbsDisplayer<Canvas, Typeface> {
     }
 
     private void setDanmakuPaintWidthAndHeight(BaseDanmaku danmaku, float w, float h) {
-        float pw = w + 2 * danmaku.padding;
-        float ph = h + 2 * danmaku.padding;
+        float pw = w + danmaku.paddingLeft + danmaku.paddingRight;
+        float ph = h + danmaku.paddingTop + danmaku.paddingBottom;
         if (danmaku.borderColor != 0) {
             pw += 2 * mDisplayConfig.BORDER_WIDTH;
             ph += 2 * mDisplayConfig.BORDER_WIDTH;

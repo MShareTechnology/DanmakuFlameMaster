@@ -136,7 +136,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         @Override
         public void measure(BaseDanmaku danmaku, TextPaint paint, boolean fromWorkerThread) {
-            danmaku.padding = 10;  // 在背景绘制模式下增加padding
+            danmaku.setPadding(10);;  // 在背景绘制模式下增加padding
             super.measure(danmaku, paint, fromWorkerThread);
         }
 
@@ -230,7 +230,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         .setCacheStuffer(new SpannedCacheStuffer(), mCacheStufferAdapter) // 图文混排使用SpannedCacheStuffer
 //        .setCacheStuffer(new BackgroundCacheStuffer())  // 绘制背景使用BackgroundCacheStuffer
         .setMaximumLines(maxLinesPair)
-        .preventOverlapping(overlappingEnablePair).setDanmakuMargin(40)
+        .preventOverlapping(overlappingEnablePair).setDanmakuMargin(10)
         .setRefreshRate(refreshRate); // 设置屏幕刷新率
 
         if (mDanmakuView != null) {
@@ -397,11 +397,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // for(int i=0;i<100;i++){
         // }
         danmaku.text = "这是一条弹幕" + System.nanoTime();
-        danmaku.padding = 5;
+        danmaku.setPadding(10,20,20,0);
+
         danmaku.priority = 0;  // 可能会被各种过滤器过滤并隐藏显示
         danmaku.isLive = islive;
         danmaku.setTime(mDanmakuView.getCurrentTime() + 1200);
-        danmaku.textSize = 25f * (mParser.getDisplayer().getDensity() - 0.6f);
+        danmaku.textSize = 20f * (mParser.getDisplayer().getDensity() - 0.6f);
         danmaku.textColor = Color.RED;
         danmaku.textShadowColor = Color.WHITE;
         // danmaku.underlineColor = Color.GREEN;
@@ -416,7 +417,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         drawable.setBounds(0, 0, 100, 100);
         SpannableStringBuilder spannable = createSpannable(drawable);
         danmaku.text = spannable;
-        danmaku.padding = 5;
+        danmaku.setPadding(5);
         danmaku.priority = 1;  // 一定会显示, 一般用于本机发送的弹幕
         danmaku.isLive = islive;
         danmaku.setTime(mDanmakuView.getCurrentTime() + 1200);

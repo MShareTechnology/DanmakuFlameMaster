@@ -149,7 +149,7 @@ public class UglyViewCacheStufferSampleActivity extends Activity implements View
 
         @Override
         public void measure(BaseDanmaku danmaku, TextPaint paint, boolean fromWorkerThread) {
-            danmaku.padding = 10;  // 在背景绘制模式下增加padding
+            danmaku.setPadding(10);  // 在背景绘制模式下增加padding
             super.measure(danmaku, paint, fromWorkerThread);
         }
 
@@ -547,7 +547,7 @@ public class UglyViewCacheStufferSampleActivity extends Activity implements View
         // for(int i=0;i<100;i++){
         // }
         danmaku.text = "这是一条弹幕" + System.nanoTime();
-        danmaku.padding = 5;
+        danmaku.setPadding(5);
         danmaku.priority = 0;  // 可能会被各种过滤器过滤并隐藏显示
         danmaku.isLive = islive;
         danmaku.setTime(mDanmakuView.getCurrentTime() + 1200);
@@ -567,7 +567,7 @@ public class UglyViewCacheStufferSampleActivity extends Activity implements View
         //SpannableStringBuilder spannable = createSpannable(drawable);
         danmaku.text = "这是文本，图片在textview左侧";
         danmaku.setTag(new MyImageWare("http://i0.hdslb.com/bfs/face/084bd13eb5dc51a64674085bb28e958ecd5addd0.jpg@180w_180h.webp", danmaku, mIconWidth, mIconWidth, mDanmakuView));
-        danmaku.padding = 5;
+        danmaku.setPadding(5);
         danmaku.priority = 1;  // 一定会显示, 一般用于本机发送的弹幕
         danmaku.isLive = islive;
         danmaku.setTime(mDanmakuView.getCurrentTime() + 1200);
