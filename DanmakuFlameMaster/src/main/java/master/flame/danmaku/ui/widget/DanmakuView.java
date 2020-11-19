@@ -63,8 +63,6 @@ public class DanmakuView extends View implements IDanmakuView, IDanmakuViewContr
 
     private float mYOff;
 
-    private OnClickListener mOnClickListener;
-
     private DanmakuTouchHelper mTouchHelper;
     
     private boolean mShowFps;
