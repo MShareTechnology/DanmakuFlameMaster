@@ -91,7 +91,7 @@ public class DeviceUtils {
             }
 
             return (String) fieldValue;
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
 

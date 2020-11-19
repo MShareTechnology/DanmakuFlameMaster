@@ -112,7 +112,7 @@ public class DrawHandler extends Handler {
 
     private static final int MAX_RECORD_SIZE = 500;
 
-    private LinkedList<Long> mDrawTimes = new LinkedList<>();
+    private final LinkedList<Long> mDrawTimes = new LinkedList<>();
 
     private UpdateThread mThread;
 
@@ -555,8 +555,10 @@ public class DrawHandler extends Handler {
         long averageFrameConsumingTime = 16;
         mCordonTime = Math.max(33, (long) (averageFrameConsumingTime * 2.5f));
         mCordonTime2 = (long) (mCordonTime * 2.5f);
-        mFrameUpdateRate = Math.max(16, averageFrameConsumingTime / 15 * 15);
+//        mFrameUpdateRate = Math.max(16, averageFrameConsumingTime / 15 * 15);
+        mFrameUpdateRate = getConfig().getFrameUpdateRate();
         mThresholdTime = mFrameUpdateRate + 3;
+
 //        Log.i("DrawHandler", "initRenderingConfigs test-fps:" + averageFrameConsumingTime + "ms,mCordonTime:"
 //                + mCordonTime + ",mFrameRefreshingRate:" + mFrameUpdateRate);
     }

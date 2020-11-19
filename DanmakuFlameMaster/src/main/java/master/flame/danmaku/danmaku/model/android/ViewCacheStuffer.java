@@ -53,7 +53,7 @@ public abstract class ViewCacheStuffer<VH extends ViewCacheStuffer.ViewHolder> e
 
     private final int mMaximumWidthPixels;
     private final int mMaximumHeightPixels;
-    private SparseArray<List<VH>> mViewHolderArray = new SparseArray();
+    private SparseArray<List<VH>> mViewHolderArray = new SparseArray<>();
 
     public abstract VH onCreateViewHolder(int viewType);
 

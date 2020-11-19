@@ -18,6 +18,7 @@ import master.flame.danmaku.danmaku.model.BaseDanmaku;
 import master.flame.danmaku.danmaku.model.GlobalFlagValues;
 import master.flame.danmaku.danmaku.model.IDanmakus;
 
+@SuppressWarnings({"UnusedReturnValue", "unused"})
 public class DanmakuContext implements Cloneable {
 
     public static DanmakuContext create() {
@@ -62,7 +63,7 @@ public class DanmakuContext implements Cloneable {
 
     public boolean SpecialDanmakuVisibility = true;
     
-    List<Integer> mFilterTypes = new ArrayList<Integer>();
+    List<Integer> mFilterTypes = new ArrayList<>();
 
     /**
      * 同屏弹幕数量 -1 按绘制效率自动调整 0 无限制 n 同屏最大显示n个弹幕
@@ -74,13 +75,15 @@ public class DanmakuContext implements Cloneable {
      */
     public float scrollSpeedFactor = 1.0f;
 
+    private int mUpdateRate = 16;
+
     public AbsDanmakuSync danmakuSync;
 
-    List<Integer> mColorValueWhiteList = new ArrayList<Integer>();
+    List<Integer> mColorValueWhiteList = new ArrayList<>();
     
-    List<Integer> mUserIdBlackList = new ArrayList<Integer>(); 
+    List<Integer> mUserIdBlackList = new ArrayList<>();
     
-    List<String> mUserHashBlackList = new ArrayList<String>();
+    List<String> mUserHashBlackList = new ArrayList<>();
 
     private List<WeakReference<ConfigChangedCallback>> mCallbackList;
 
@@ -128,6 +131,23 @@ public class DanmakuContext implements Cloneable {
      * Note: 在系统{@link android.os.Build.VERSION_CODES#JELLY_BEAN}以下, 0方式会被2方式代替
      */
     public byte updateMethod = 0;
+
+    public int getFrameUpdateRate() {
+        return mUpdateRate;
+    }
+
+    /**
+     * 设置屏幕刷新率
+     * @param rate
+     */
+    public void setFrameUpdateRate(int rate) {
+        mUpdateRate = rate;
+    }
+
+    public void setRefreshRate(float refreshRate) {
+        mUpdateRate = (int) (1000 / refreshRate);
+    }
+
 
     /**
      * set typeface
