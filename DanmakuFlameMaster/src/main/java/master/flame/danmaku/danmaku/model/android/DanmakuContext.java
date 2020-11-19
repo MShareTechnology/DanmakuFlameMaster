@@ -140,12 +140,14 @@ public class DanmakuContext implements Cloneable {
      * 设置屏幕刷新率
      * @param rate
      */
-    public void setFrameUpdateRate(int rate) {
+    public DanmakuContext setFrameUpdateRate(int rate) {
         mUpdateRate = rate;
+        return this;
     }
 
-    public void setRefreshRate(float refreshRate) {
+    public DanmakuContext setRefreshRate(float refreshRate) {
         mUpdateRate = (int) (1000 / refreshRate);
+        return this;
     }
 
 
