@@ -132,8 +132,9 @@ public abstract class ViewCacheStuffer<VH extends ViewCacheStuffer.ViewHolder> e
         //draw border
         if (danmaku.borderColor != 0) {
             Paint borderPaint = displayerConfig.getBorderPaint(danmaku);
-            canvas.drawRect(left, top, left + danmaku.paintWidth, top + danmaku.paintHeight,
-                    borderPaint);
+//            canvas.drawRect(left, top, left + danmaku.paintWidth, top + danmaku.paintHeight,
+//                    borderPaint);
+            canvas.drawRoundRect(left, top, left + danmaku.paintWidth, top + danmaku.paintHeight, danmaku.borderRound, danmaku.borderRound, borderPaint);
         }
         //draw danmaku
         viewHolder.layout(0, 0, (int) danmaku.paintWidth, (int) danmaku.paintHeight);

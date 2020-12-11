@@ -54,11 +54,6 @@ public class AndroidDisplayer extends AbsDisplayer<Canvas, Typeface> {
         public int UNDERLINE_HEIGHT = 4;
 
         /**
-         * 边框厚度
-         */
-        public static final int BORDER_WIDTH = 4;
-
-        /**
          * 阴影半径
          */
         private float SHADOW_RADIUS = 4.0f;
@@ -113,9 +108,9 @@ public class AndroidDisplayer extends AbsDisplayer<Canvas, Typeface> {
             UNDERLINE_PAINT = new Paint();
             UNDERLINE_PAINT.setStrokeWidth(UNDERLINE_HEIGHT);
             UNDERLINE_PAINT.setStyle(Style.STROKE);
+
             BORDER_PAINT = new Paint();
             BORDER_PAINT.setStyle(Style.STROKE);
-            BORDER_PAINT.setStrokeWidth(BORDER_WIDTH);
         }
 
         public void setTypeface(Typeface typeface) {
@@ -172,6 +167,7 @@ public class AndroidDisplayer extends AbsDisplayer<Canvas, Typeface> {
 
         public Paint getBorderPaint(BaseDanmaku danmaku) {
             BORDER_PAINT.setColor(danmaku.borderColor);
+            BORDER_PAINT.setStrokeWidth(danmaku.borderWidth);
             return BORDER_PAINT;
         }
 
@@ -531,8 +527,8 @@ public class AndroidDisplayer extends AbsDisplayer<Canvas, Typeface> {
         float pw = w + danmaku.paddingLeft + danmaku.paddingRight;
         float ph = h + danmaku.paddingTop + danmaku.paddingBottom;
         if (danmaku.borderColor != 0) {
-            pw += 2 * mDisplayConfig.BORDER_WIDTH;
-            ph += 2 * mDisplayConfig.BORDER_WIDTH;
+            pw += 2 * danmaku.borderWidth;
+            ph += 2 * danmaku.borderWidth;
         }
         danmaku.paintWidth = pw + getStrokeWidth();
         danmaku.paintHeight = ph;

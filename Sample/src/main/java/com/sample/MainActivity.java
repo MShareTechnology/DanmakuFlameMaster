@@ -407,6 +407,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         danmaku.textShadowColor = Color.WHITE;
         // danmaku.underlineColor = Color.GREEN;
         danmaku.borderColor = Color.GREEN;
+        danmaku.borderWidth = 1 * getResources().getDisplayMetrics().density + 0.5f;
+        danmaku.borderRound = 4 * getResources().getDisplayMetrics().density;
         mDanmakuView.addDanmaku(danmaku);
 
     }

@@ -452,6 +452,8 @@ public class CacheManagingDrawTask extends DrawTask {
                             && danmaku.paintHeight == refDanmaku.paintHeight
                             && danmaku.underlineColor == refDanmaku.underlineColor
                             && danmaku.borderColor == refDanmaku.borderColor
+                            && danmaku.borderWidth == refDanmaku.borderWidth
+                            && danmaku.borderRound == refDanmaku.borderRound
                             && danmaku.textColor == refDanmaku.textColor
                             && danmaku.text.equals(refDanmaku.text)
                             && danmaku.tag == refDanmaku.tag) {

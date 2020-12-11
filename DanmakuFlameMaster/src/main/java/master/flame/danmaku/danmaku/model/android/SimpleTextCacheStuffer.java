@@ -89,8 +89,8 @@ public class SimpleTextCacheStuffer extends BaseCacheStuffer {
         left += danmaku.paddingLeft;
         top += danmaku.paddingTop;
         if (danmaku.borderColor != 0) {
-            left += displayerConfig.BORDER_WIDTH;
-            top += displayerConfig.BORDER_WIDTH;
+            left += danmaku.borderWidth;
+            top += danmaku.borderWidth;
         }
 
         displayerConfig.definePaintParams(fromWorkerThread);
@@ -158,8 +158,9 @@ public class SimpleTextCacheStuffer extends BaseCacheStuffer {
         //draw border
         if (danmaku.borderColor != 0) {
             Paint borderPaint = displayerConfig.getBorderPaint(danmaku);
-            canvas.drawRect(_left, _top, _left + danmaku.paintWidth, _top + danmaku.paintHeight,
-                    borderPaint);
+//            canvas.drawRect(_left, _top, _left + danmaku.paintWidth, _top + danmaku.paintHeight,
+//                    borderPaint);
+            canvas.drawRoundRect(_left, _top, _left + danmaku.paintWidth, _top + danmaku.paintHeight, danmaku.borderRound, danmaku.borderRound, borderPaint);
         }
 
     }

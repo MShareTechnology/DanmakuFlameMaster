@@ -109,6 +109,16 @@ public abstract class BaseDanmaku {
     public int borderColor = 0;
 
     /**
+     * 边框厚度
+     */
+    public float borderWidth = 4f;
+
+    /**
+     * 边框圆角弧度
+     */
+    public float borderRound = 0;
+
+    /**
      * 内边距(像素)
      */
     public int paddingLeft = 0;
