@@ -232,7 +232,7 @@ public abstract class BaseDanmaku {
      */
     public int firstShownFlag = -1;
 
-    private SparseArray<Object> mTags = new SparseArray<>();
+    private final SparseArray<Object> mTags = new SparseArray<>();
 
     public long getDuration() {
         return duration.value;

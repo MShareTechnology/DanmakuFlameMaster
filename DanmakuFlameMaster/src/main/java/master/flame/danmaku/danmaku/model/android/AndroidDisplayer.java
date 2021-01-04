@@ -42,11 +42,11 @@ public class AndroidDisplayer extends AbsDisplayer<Canvas, Typeface> {
 
         public final TextPaint PAINT, PAINT_DUPLICATE;
 
-        private Paint ALPHA_PAINT;
+        private final Paint ALPHA_PAINT;
 
-        private Paint UNDERLINE_PAINT;
+        private final Paint UNDERLINE_PAINT;
 
-        private Paint BORDER_PAINT;
+        private final Paint BORDER_PAINT;
 
         /**
          * 下划线高度
@@ -255,9 +255,9 @@ public class AndroidDisplayer extends AbsDisplayer<Canvas, Typeface> {
         }
     }
 
-    private Camera camera = new Camera();
+    private final Camera camera = new Camera();
 
-    private Matrix matrix = new Matrix();
+    private final Matrix matrix = new Matrix();
 
     private final DisplayerConfig mDisplayConfig = new DisplayerConfig();
 
@@ -473,7 +473,7 @@ public class AndroidDisplayer extends AbsDisplayer<Canvas, Typeface> {
 
     private int saveCanvas(BaseDanmaku danmaku, Canvas canvas, float left, float top) {
         camera.save();
-        if (locationZ !=0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) {
+        if (locationZ != 0) {
             camera.setLocation(0, 0, locationZ);
         }
         camera.rotateY(-danmaku.rotationY);
