@@ -158,9 +158,24 @@ public class SimpleTextCacheStuffer extends BaseCacheStuffer {
         //draw border
         if (danmaku.borderColor != 0) {
             Paint borderPaint = displayerConfig.getBorderPaint(danmaku);
-//            canvas.drawRect(_left, _top, _left + danmaku.paintWidth, _top + danmaku.paintHeight,
-//                    borderPaint);
-            canvas.drawRoundRect(_left, _top, _left + danmaku.paintWidth, _top + danmaku.paintHeight, danmaku.borderRound, danmaku.borderRound, borderPaint);
+
+            float padding = 0f;
+
+            if (danmaku.borderRound > 0) {
+                borderPaint.setAntiAlias(true);
+
+                // 解决四个圆角的线比较粗的问题
+                padding = borderPaint.getStrokeWidth() / 2;
+            }
+
+            canvas.drawRoundRect(
+                    _left + padding,
+                    _top + padding,
+                    _left + danmaku.paintWidth - padding,
+                    _top + danmaku.paintHeight - padding,
+                    danmaku.borderRound,
+                    danmaku.borderRound,
+                    borderPaint);
         }
 
     }

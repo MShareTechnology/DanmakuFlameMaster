@@ -134,7 +134,25 @@ public abstract class ViewCacheStuffer<VH extends ViewCacheStuffer.ViewHolder> e
             Paint borderPaint = displayerConfig.getBorderPaint(danmaku);
 //            canvas.drawRect(left, top, left + danmaku.paintWidth, top + danmaku.paintHeight,
 //                    borderPaint);
-            canvas.drawRoundRect(left, top, left + danmaku.paintWidth, top + danmaku.paintHeight, danmaku.borderRound, danmaku.borderRound, borderPaint);
+
+            float padding = 0f;
+
+            if (danmaku.borderRound > 0) {
+                borderPaint.setAntiAlias(true);
+
+                // 解决四个圆角的线比较粗的问题
+                padding = borderPaint.getStrokeWidth() / 2;
+            }
+
+            canvas.drawRoundRect(
+                    left + padding,
+                    top + padding,
+                    left + danmaku.paintWidth - padding,
+                    top + danmaku.paintHeight - padding,
+                    danmaku.borderRound,
+                    danmaku.borderRound,
+                    borderPaint);
+
         }
         //draw danmaku
         viewHolder.layout(0, 0, (int) danmaku.paintWidth, (int) danmaku.paintHeight);
