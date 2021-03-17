@@ -1,6 +1,7 @@
 
 package master.flame.danmaku.danmaku.model.android;
 
+import android.graphics.Canvas;
 import android.graphics.Typeface;
 
 import java.lang.ref.WeakReference;
@@ -99,7 +100,7 @@ public class DanmakuContext implements Cloneable {
 
     private boolean mIsPreventOverlappingEnabled;
 
-    public AbsDisplayer mDisplayer = new AndroidDisplayer();
+    public AbsDisplayer<Canvas,Typeface> mDisplayer = new AndroidDisplayer();
 
     public GlobalFlagValues mGlobalFlagValues = new GlobalFlagValues();
 
@@ -119,7 +120,7 @@ public class DanmakuContext implements Cloneable {
         this.mBaseComparator = baseComparator;
     }
 
-    public AbsDisplayer getDisplayer() {
+    public AbsDisplayer<Canvas,Typeface> getDisplayer() {
         return mDisplayer;
     }
 
@@ -682,7 +683,7 @@ public class DanmakuContext implements Cloneable {
 
     public void registerConfigChangedCallback(ConfigChangedCallback listener) {
         if (listener == null || mCallbackList == null) {
-            mCallbackList = Collections.synchronizedList(new ArrayList<WeakReference<ConfigChangedCallback>>());
+            mCallbackList = Collections.synchronizedList(new ArrayList<>());
         }
         for (WeakReference<ConfigChangedCallback> configReferer : mCallbackList) {
             if (listener.equals(configReferer.get())) {
@@ -697,7 +698,7 @@ public class DanmakuContext implements Cloneable {
             return;
         for (WeakReference<ConfigChangedCallback> configReferer : mCallbackList) {
             if (listener.equals(configReferer.get())) {
-                mCallbackList.remove(listener);
+                mCallbackList.remove(configReferer);
                 return;
             }
         }
@@ -721,13 +722,13 @@ public class DanmakuContext implements Cloneable {
         }
     }
 
-    public DanmakuContext registerFilter(DanmakuFilters.BaseDanmakuFilter filter) {
+    public DanmakuContext registerFilter(DanmakuFilters.BaseDanmakuFilter<?> filter) {
         mDanmakuFilters.registerFilter(filter);
         mGlobalFlagValues.updateFilterFlag();
         return this;
     }
 
-    public DanmakuContext unregisterFilter(DanmakuFilters.BaseDanmakuFilter filter) {
+    public DanmakuContext unregisterFilter(DanmakuFilters.BaseDanmakuFilter<?> filter) {
         mDanmakuFilters.unregisterFilter(filter);
         mGlobalFlagValues.updateFilterFlag();
         return this;

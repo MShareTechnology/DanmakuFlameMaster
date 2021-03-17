@@ -281,8 +281,8 @@ public class DanmakuSurfaceView extends SurfaceView implements IDanmakuView, IDa
                 RenderingState rs = handler.draw(canvas);
                 if (mShowFps) {
                     if (mDrawTimes == null)
-                        mDrawTimes = new LinkedList<Long>();
-                    dtime = SystemClock.uptimeMillis() - stime;
+                        mDrawTimes = new LinkedList<>();
+//                    dtime = SystemClock.uptimeMillis() - stime;
                     String fps = String.format(Locale.getDefault(),
                             "fps %.2f,time:%d s,cache:%d,miss:%d", fps(), getCurrentTime() / 1000,
                             rs.cacheHitCount, rs.cacheMissCount);

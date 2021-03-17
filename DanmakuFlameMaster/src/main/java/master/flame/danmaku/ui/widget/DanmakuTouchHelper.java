@@ -15,8 +15,8 @@ import master.flame.danmaku.danmaku.model.android.Danmakus;
  */
 public class DanmakuTouchHelper {
     private final GestureDetector mTouchDelegate;
-    private IDanmakuView danmakuView;
-    private RectF mDanmakuBounds;
+    private final IDanmakuView danmakuView;
+    private final RectF mDanmakuBounds;
     private float mXOff;
     private float mYOff;
 

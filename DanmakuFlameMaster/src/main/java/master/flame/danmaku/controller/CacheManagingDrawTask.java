@@ -115,7 +115,7 @@ public class CacheManagingDrawTask extends DrawTask {
     }
 
     @Override
-    public RenderingState draw(AbsDisplayer displayer) {
+    public RenderingState draw(AbsDisplayer<?,?> displayer) {
         RenderingState result = super.draw(displayer);
         synchronized (mDrawingNotify) {
             mDrawingNotify.notify();

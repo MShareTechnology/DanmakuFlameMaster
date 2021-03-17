@@ -52,9 +52,7 @@ public class DanmakuFilters {
 
         @Override
         public void clear() {
-
         }
-
     }
 
     /**
@@ -64,7 +62,7 @@ public class DanmakuFilters {
      */
     public static class TypeDanmakuFilter extends BaseDanmakuFilter<List<Integer>> {
 
-        final List<Integer> mFilterTypes = Collections.synchronizedList(new ArrayList<Integer>());
+        final List<Integer> mFilterTypes = Collections.synchronizedList(new ArrayList<>());
 
         public void enableType(Integer type) {
             if (!mFilterTypes.contains(type))
