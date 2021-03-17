@@ -283,15 +283,15 @@ public class DanmakuTextureView extends TextureView implements IDanmakuView, IDa
         long stime = SystemClock.uptimeMillis();
         if (!isShown())
             return -1;
-        long dtime = 0;
+        long dTime;
         Canvas canvas = lockCanvas();
         if (canvas != null) {
             if (handler != null) {
                 RenderingState rs = handler.draw(canvas);
                 if (mShowFps) {
                     if (mDrawTimes == null)
-                        mDrawTimes = new LinkedList<Long>();
-                    dtime = SystemClock.uptimeMillis() - stime;
+                        mDrawTimes = new LinkedList<>();
+//                    dTime = SystemClock.uptimeMillis() - stime;
                     String fps = String.format(Locale.getDefault(),
                             "fps %.2f,time:%d s,cache:%d,miss:%d", fps(), getCurrentTime() / 1000,
                             rs.cacheHitCount, rs.cacheMissCount);
@@ -301,8 +301,8 @@ public class DanmakuTextureView extends TextureView implements IDanmakuView, IDa
             if (isSurfaceCreated)
                 unlockCanvasAndPost(canvas);
         }
-        dtime = SystemClock.uptimeMillis() - stime;
-        return dtime;
+        dTime = SystemClock.uptimeMillis() - stime;
+        return dTime;
     }
 
     public void toggle() {

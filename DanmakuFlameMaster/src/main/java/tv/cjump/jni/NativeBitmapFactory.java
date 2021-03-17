@@ -17,9 +17,9 @@ public class NativeBitmapFactory {
 
     static boolean nativeLibLoaded = false;
     static boolean notLoadAgain = false;
-    
+
     public static boolean isInNativeAlloc() {
-        return android.os.Build.VERSION.SDK_INT < 11 || (nativeLibLoaded && nativeIntField != null);
+        return nativeLibLoaded && nativeIntField != null;
     }
 
     public static void loadLibs() {
@@ -35,18 +35,14 @@ public class NativeBitmapFactory {
             return;
         }
         try {
-            if (android.os.Build.VERSION.SDK_INT >= 11 && android.os.Build.VERSION.SDK_INT < 23) {
+            if (android.os.Build.VERSION.SDK_INT < 23) {
                 System.loadLibrary("ndkbitmap");
                 nativeLibLoaded = true;
             } else {
                 notLoadAgain = true;
                 nativeLibLoaded = false;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            notLoadAgain = true;
-            nativeLibLoaded = false;
-        } catch (Error e) {
+        } catch (Exception | Error e) {
             e.printStackTrace();
             notLoadAgain = true;
             nativeLibLoaded = false;
@@ -69,11 +65,11 @@ public class NativeBitmapFactory {
             }
         }
 
-        Log.e("NativeBitmapFactory", "loaded" + nativeLibLoaded);
+//        Log.e("NativeBitmapFactory", "loaded" + nativeLibLoaded);
     }
 
     public static synchronized void releaseLibs() {
-        boolean loaded =  nativeLibLoaded;
+        boolean loaded = nativeLibLoaded;
         nativeIntField = null;
         nativeLibLoaded = false;
         if (loaded) {
@@ -137,9 +133,7 @@ public class NativeBitmapFactory {
                 return 0;
             }
             return nativeIntField.getInt(config);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (IllegalArgumentException | IllegalAccessException e) {
             e.printStackTrace();
         }
         return 0;
@@ -176,9 +170,9 @@ public class NativeBitmapFactory {
     private static native boolean release();
 
     private static native Bitmap createBitmap(int width, int height, int nativeConfig,
-            boolean hasAlpha);
+                                              boolean hasAlpha);
 
     private static native Bitmap createBitmap19(int width, int height, int nativeConfig,
-            boolean hasAlpha);
+                                                boolean hasAlpha);
 
 }

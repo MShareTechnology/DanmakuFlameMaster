@@ -20,7 +20,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -71,7 +70,7 @@ public class DanmakuView extends View implements IDanmakuView, IDanmakuViewContr
 
     protected int mDrawingThreadType = THREAD_TYPE_NORMAL_PRIORITY;
 
-    private Object mDrawMonitor = new Object();
+    private final Object mDrawMonitor = new Object();
 
     private boolean mDrawFinished = false;
 
@@ -261,23 +260,19 @@ public class DanmakuView extends View implements IDanmakuView, IDanmakuViewContr
             return 0;
         if (!isShown())
             return -1;
-        long stime = SystemClock.uptimeMillis();
+        long sTime = SystemClock.uptimeMillis();
         lockCanvas();
-        return SystemClock.uptimeMillis() - stime;
+        return SystemClock.uptimeMillis() - sTime;
     }
     
     @SuppressLint("NewApi")
     private void postInvalidateCompat() {
         mRequestRender = true;
-        if(Build.VERSION.SDK_INT >= 16) {
-            this.postInvalidateOnAnimation();
-        } else {
-            this.postInvalidate();
-        }
+        this.postInvalidateOnAnimation();
     }
 
     protected void lockCanvas() {
-        if(mDanmakuVisible == false) {
+        if(!mDanmakuVisible) {
             return;
         }
         postInvalidateCompat();
@@ -286,7 +281,7 @@ public class DanmakuView extends View implements IDanmakuView, IDanmakuViewContr
                 try {
                     mDrawMonitor.wait(200);
                 } catch (InterruptedException e) {
-                    if (mDanmakuVisible == false || handler == null || handler.isStop()) {
+                    if (!mDanmakuVisible || handler == null || handler.isStop()) {
                         break;
                     } else {
                         Thread.currentThread().interrupt();
@@ -323,7 +318,7 @@ public class DanmakuView extends View implements IDanmakuView, IDanmakuViewContr
                 RenderingState rs = handler.draw(canvas);
                 if (mShowFps) {
                     if (mDrawTimes == null)
-                        mDrawTimes = new LinkedList<Long>();
+                        mDrawTimes = new LinkedList<>();
                     String fps = String.format(Locale.getDefault(),
                             "fps %.2f,time:%d s,cache:%d,miss:%d", fps(), getCurrentTime() / 1000,
                             rs.cacheHitCount, rs.cacheMissCount);
@@ -365,7 +360,7 @@ public class DanmakuView extends View implements IDanmakuView, IDanmakuViewContr
 
     private int mResumeTryCount = 0;
 
-    private Runnable mResumeRunnable = new Runnable() {
+    private final Runnable mResumeRunnable = new Runnable() {
         @Override
         public void run() {
             DrawHandler drawHandler = handler;
@@ -536,11 +531,7 @@ public class DanmakuView extends View implements IDanmakuView, IDanmakuViewContr
     @SuppressLint("NewApi")
     public boolean isHardwareAccelerated() {
         // >= 3.0
-        if (Build.VERSION.SDK_INT >= 11) {
-            return super.isHardwareAccelerated();
-        } else {
-            return false;
-        }
+        return super.isHardwareAccelerated();
     }
 
     @Override

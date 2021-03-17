@@ -689,7 +689,7 @@ public class DanmakuContext implements Cloneable {
                 return;
             }
         }
-        mCallbackList.add(new WeakReference<ConfigChangedCallback>(listener));
+        mCallbackList.add(new WeakReference<>(listener));
     }
 
     public void unregisterConfigChangedCallback(ConfigChangedCallback listener) {

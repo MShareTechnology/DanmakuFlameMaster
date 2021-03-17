@@ -374,9 +374,6 @@ public abstract class BaseDanmaku {
     }
 
     public Object getTag(int key) {
-        if (mTags == null) {
-            return null;
-        }
         return mTags.get(key);
     }
 

@@ -105,7 +105,7 @@ public class DanmakuUtils {
         return (w) * (h) * bytesPerPixel;
     }
     
-    public final static boolean isDuplicate(BaseDanmaku obj1, BaseDanmaku obj2) {
+    public static boolean isDuplicate(BaseDanmaku obj1, BaseDanmaku obj2) {
         if(obj1 == obj2) {
             return false;
         }
@@ -125,7 +125,7 @@ public class DanmakuUtils {
         return false;
     }
 
-    public final static int compare(BaseDanmaku obj1, BaseDanmaku obj2) {
+    public static int compare(BaseDanmaku obj1, BaseDanmaku obj2) {
         
         if (obj1 == obj2) {
             return 0;
@@ -153,7 +153,7 @@ public class DanmakuUtils {
         return r;
     }
 
-    public final static boolean isOverSize(IDisplayer disp, BaseDanmaku item) {
+    public static boolean isOverSize(IDisplayer disp, BaseDanmaku item) {
         return disp.isHardwareAccelerated() && (item.paintWidth > disp.getMaximumCacheWidth() || item.paintHeight > disp.getMaximumCacheHeight());
     }
 

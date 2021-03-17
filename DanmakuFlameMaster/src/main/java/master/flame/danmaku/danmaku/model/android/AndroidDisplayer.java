@@ -23,7 +23,6 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.text.TextPaint;
 
 import java.util.HashMap;
@@ -128,9 +127,9 @@ public class AndroidDisplayer extends AbsDisplayer<Canvas, Typeface> {
 
         public void setProjectionConfig(float offsetX, float offsetY, int alpha) {
             if (sProjectionOffsetX != offsetX || sProjectionOffsetY != offsetY || sProjectionAlpha != alpha) {
-                sProjectionOffsetX = (offsetX > 1.0f) ? offsetX : 1.0f;
-                sProjectionOffsetY = (offsetY > 1.0f) ? offsetY : 1.0f;
-                sProjectionAlpha = (alpha < 0) ? 0 : ((alpha > 255) ? 255 : alpha);
+                sProjectionOffsetX = Math.max(offsetX, 1.0f);
+                sProjectionOffsetY = Math.max(offsetY, 1.0f);
+                sProjectionAlpha = (alpha < 0) ? 0 : (Math.min(alpha, 255));
             }
         }
 
@@ -268,21 +267,13 @@ public class AndroidDisplayer extends AbsDisplayer<Canvas, Typeface> {
     }
 
     @SuppressLint("NewApi")
-    private static final int getMaximumBitmapWidth(Canvas c) {
-        if (Build.VERSION.SDK_INT >= 14) {
-            return c.getMaximumBitmapWidth();
-        } else {
-            return c.getWidth();
-        }
+    private static int getMaximumBitmapWidth(Canvas c) {
+        return c.getMaximumBitmapWidth();
     }
 
     @SuppressLint("NewApi")
-    private static final int getMaximumBitmapHeight(Canvas c) {
-        if (Build.VERSION.SDK_INT >= 14) {
-            return c.getMaximumBitmapHeight();
-        } else {
-            return c.getHeight();
-        }
+    private static int getMaximumBitmapHeight(Canvas c) {
+        return c.getMaximumBitmapHeight();
     }
 
     public void setTypeFace(Typeface font) {
